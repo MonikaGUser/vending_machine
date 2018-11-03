@@ -1,13 +1,16 @@
 package pl.sdacademy.vending.controller;
 
+import pl.sdacademy.vending.model.Tray;
 import pl.sdacademy.vending.model.VendingMachine;
+
+import java.util.Optional;
 
 public class CustomerOperationController {
 
-    private VendingMachine machine;
+    private final VendingMachine machine;
 
-    public CustomerOperationController() {
-        machine = new VendingMachine();
+    public CustomerOperationController(VendingMachine machine) {
+     this.machine = machine;
     }
 
     public void printMachine() {
@@ -39,9 +42,9 @@ public class CustomerOperationController {
         System.out.print("+--------+");
     }
     private void printSymbol (int row, int column){
-        char symbolLetter = (char)('A' +row);
-        int symbolNumber = column +1;
-        System.out.print("|   " + symbolLetter+ symbolNumber +"   |");
+        Optional<Tray> tray = machine.getTrayAtPosition(row, column);
+        String traySymbol = tray.map(Tray::getSymbol).orElse("--");
+        System.out.print("|   " + traySymbol +"   |");
         // System.out.print("|   " + String.valueOf((char)(row+1+64)) + (column+1) + "   |");
     }
     private void printLowerBoundary (int row, int column){
