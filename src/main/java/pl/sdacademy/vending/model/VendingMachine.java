@@ -44,14 +44,17 @@ public class VendingMachine {
            // Tray tray = Tray.builder(symbol).price(randomPrice).build();
             //trays[rowNo][columnNo] = tray;
             int productProbability = random.nextInt(10);
-            if (productProbability < 1) {
-                Tray tray = Tray.builder(symbol).price(randomPrice).product(new Product("Product " + symbol))
-                        .product(new Product("Product" + symbol)).build();
-                trays[rowNo][columnNo] = tray;
-            } else {
-                Tray tray = Tray.builder(symbol).price(randomPrice).build();
-                trays[rowNo][columnNo] = tray;
+
+            Tray.Builder trayBuilder = Tray.builder(symbol).price(randomPrice);
+
+            if (productProbability < 5) {
+                trayBuilder = trayBuilder.product(new Product("Product " + symbol));
             }
+            if (productProbability<1){
+                trayBuilder = trayBuilder.product(new Product("Product "+ symbol));
+
+            }
+            trays[rowNo][columnNo] = trayBuilder.build();
         }
         //stworzyc tablice dwuwymiarową
         // do kazdego pola tablicy wpisac nowy obiekt tacki
