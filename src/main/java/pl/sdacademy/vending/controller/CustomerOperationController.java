@@ -1,5 +1,4 @@
 package pl.sdacademy.vending.controller;
-
 import pl.sdacademy.vending.model.Product;
 import pl.sdacademy.vending.model.Tray;
 import pl.sdacademy.vending.model.VendingMachine;
@@ -63,8 +62,8 @@ public class CustomerOperationController {
     private void printName(int row, int column) {
         machine.productNameAtPosition(row, column);
         Optional<String> productName = machine.productNameAtPosition(row, column);
-        String formatedName = productName.orElse("--");
-        System.out.print("|" + StringUtil.adjustText(formatedName, trayWidth) + "|");
+        String formattedName = productName.orElse("--");
+        System.out.print("|" + StringUtil.adjustText(formattedName, trayWidth) + "|");
 
 }
 
