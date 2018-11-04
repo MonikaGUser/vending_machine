@@ -32,6 +32,10 @@ public class Tray {
         return new Builder(symbol);
     }
 
+    public Optional<Product> buyProduct() {
+        return Optional.ofNullable(products.poll());//pobiera pierwszy element z kolejki
+    }
+
     public static class Builder {
         private String symbol;
         private Long price;
