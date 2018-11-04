@@ -1,6 +1,7 @@
 package pl.sdacademy.vending.model;
 
 import java.util.ArrayDeque;
+import java.util.Optional;
 import java.util.Queue;
 
 public class Tray {
@@ -21,6 +22,11 @@ public class Tray {
     public Long getPrice() {
         return price;
     }
+
+    public Optional<String> firstProductName() {
+            return Optional.ofNullable(products.peek()).map(Product::getName);//jesli jest produkt to pobierz Optional nazwę
+        //jesli nie ma produktu peek wyrzuca nulla
+        }
 
     public static Builder builder(String symbol) {
         return new Builder(symbol);

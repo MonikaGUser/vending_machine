@@ -1,6 +1,13 @@
 package pl.sdacademy.vending.util;
 
 public class StringUtil {
+    public static String duplicateText(String text, Integer countOFDuplication){
+        StringBuilder duplicatedText = new StringBuilder();
+        for (int i =0; i<countOFDuplication; i++){
+            duplicatedText = duplicatedText.append(text);
+        }
+        return duplicatedText.toString();
+    }
     public static String adjustText(String text, Integer requiredLength) {
         String expandedText = text;
         while (expandedText.length() < requiredLength) {

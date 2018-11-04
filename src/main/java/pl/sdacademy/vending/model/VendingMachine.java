@@ -1,8 +1,6 @@
 package pl.sdacademy.vending.model;
 
 import pl.sdacademy.vending.util.Configuration;
-
-import java.lang.reflect.Array;
 import java.util.Optional;
 import java.util.Random;
 
@@ -69,7 +67,6 @@ public class VendingMachine {
                 return Optional.empty();
             }
         }
-
         //zwróć tackę opakowana optional
         // a jezeli nie istnieje, to pusty optional
 
@@ -80,4 +77,17 @@ public class VendingMachine {
         public Long columnsCount () {
             return configuration.getLongProperty("machine.size.columns", 4L);
         }
+
+        public Optional<String> productNameAtPosition (Integer rowNo, Integer columnNo){
+        Optional<Tray> tray= getTrayAtPosition(rowNo, columnNo);
+        if (tray.isPresent()) {
+            return tray.get().firstProductName();
+        }else {
+            return Optional.empty();
+            }
+        //pobranie z trays odp tacki
+            //pobierz nazwe pierwszego produktu
+            //zwroc optional
+        }
+
     }
