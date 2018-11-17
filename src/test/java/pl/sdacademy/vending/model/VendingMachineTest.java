@@ -96,4 +96,62 @@ public class VendingMachineTest {
         //then
         System.out.println("Success!");
     }
+    @Test
+    public void shouldBeAbleToAddTrayToEmptySpot(){
+        //given
+        Tray tray = Tray.builder("A2").build();
+        Configuration config = mock(Configuration.class);
+        doReturn(4L).when(config).getLongProperty(eq("machine.size.columns"), anyLong()
+        );
+        doReturn(6L).when(config).getLongProperty(eq("machine.size.rows"), anyLong()
+        );
+    VendingMachine testedMachine = new VendingMachine(config);
+    //when
+       boolean placed = testedMachine.placeTray(tray);
+
+       //then
+        assertTrue(placed);
+        assertEquals(tray, testedMachine.getTrayAtPosition(0,1).get());
+    }
+    @Test
+    public void shouldNotBeAbleToAddTrayToTakenSpot(){
+        //given
+        Tray tray = Tray.builder("A2").build();
+        Tray secondTray = Tray.builder("A2").build();
+        Configuration config = mock(Configuration.class);
+        doReturn(4L).when(config).getLongProperty(eq("machine.size.columns"), anyLong()
+        );
+        doReturn(6L).when(config).getLongProperty(eq("machine.size.rows"), anyLong()
+        );
+        VendingMachine testedMachine = new VendingMachine(config);
+        //when
+        boolean firstTrayPlacementResult = testedMachine.placeTray(tray);
+        boolean secondTrayPlacementResult = testedMachine.placeTray(secondTray);
+
+        //then
+
+        assertFalse(secondTrayPlacementResult);
+        assertEquals(tray, testedMachine.getTrayAtPosition(0,1).get());
+    }
+    @Test
+    public void shouldNotBeAbleToAddTrayToNotExistingPosition(){
+        //given
+        Tray tray = Tray.builder("$$").build();
+
+        Configuration config = mock(Configuration.class);
+        doReturn(4L).when(config).getLongProperty(eq("machine.size.columns"), anyLong()
+        );
+        doReturn(6L).when(config).getLongProperty(eq("machine.size.rows"), anyLong()
+        );
+        VendingMachine testedMachine = new VendingMachine(config);
+        //when
+        boolean firstTrayPlacementResult = testedMachine.placeTray(tray);
+
+
+        //then
+
+        assertFalse(firstTrayPlacementResult);
+
+    }
+
 }

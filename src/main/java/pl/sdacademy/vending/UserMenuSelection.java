@@ -1,5 +1,7 @@
 package pl.sdacademy.vending;
 
+import java.util.Arrays;
+
 public enum UserMenuSelection {
     BUY_PRODUCT (1, "Buy product"),
     EXIT (9, "Exit");
@@ -12,15 +14,20 @@ public enum UserMenuSelection {
         this.optionText = optionText;
     }
     public static UserMenuSelection selectionForOptionNumber (Integer requestedOptionNumber){
+
+    return     Arrays.stream(values())
+                .filter(enumValue -> enumValue.getOptionNumber().equals(requestedOptionNumber))
+                .findFirst()
+                .orElseThrow(()-> new IllegalArgumentException(("Unknown option number: " +requestedOptionNumber)));
   //if (BUY_PRODUCT.getOptionNumber().equals(requestedOptionNumber)){
    //   return BUY_PRODUCT;
 //  }
-       for  (UserMenuSelection menuSelection : values()){
-           if (menuSelection.getOptionNumber().equals(requestedOptionNumber)){
-               return menuSelection;
-           }
-       }
-        throw new IllegalArgumentException(("Unknown option number: " +requestedOptionNumber));
+    //   for  (UserMenuSelection menuSelection : values()){
+    //       if (menuSelection.getOptionNumber().equals(requestedOptionNumber)){
+  //             return menuSelection;
+//           }
+ //      }
+//        throw new IllegalArgumentException(("Unknown option number: " +requestedOptionNumber));
     }
 
     public Integer getOptionNumber() {
