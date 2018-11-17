@@ -2,18 +2,20 @@ package pl.sdacademy.vending.model;
 
 import pl.sdacademy.vending.util.Configuration;
 
+import java.io.Serializable;
 import java.util.Optional;
-import java.util.Random;
 
-public class VendingMachine {
 
-    private final Configuration configuration;
+public class VendingMachine implements Serializable {
+    public static final long serialVersionUID = 1L;
+
+ //   private final Configuration configuration;
     private final Long rowsCount;
     private final Long columnsCount;
     private Tray[][] trays;
 
     public VendingMachine(Configuration configuration) {
-        this.configuration = configuration;
+    //    this.configuration = configuration;
         rowsCount = configuration.getLongProperty("machine.size.rows", 6L);
         if (rowsCount <= 0 || rowsCount > 26) {
             throw new IllegalArgumentException("Row count " + rowsCount + " is invalid");
@@ -73,11 +75,11 @@ public class VendingMachine {
     // a jezeli nie istnieje, to pusty optional
 
     public Long rowsCount() {
-        return configuration.getLongProperty("machine.size.rows", 6L);
+        return rowsCount;
     }
 
     public Long columnsCount() {
-        return configuration.getLongProperty("machine.size.columns", 4L);
+        return columnsCount;
     }
 
     public Optional<String> productNameAtPosition(Integer rowNo, Integer columnNo) {
