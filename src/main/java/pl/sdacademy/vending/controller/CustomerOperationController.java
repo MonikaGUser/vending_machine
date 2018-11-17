@@ -1,4 +1,5 @@
 package pl.sdacademy.vending.controller;
+
 import pl.sdacademy.vending.model.Product;
 import pl.sdacademy.vending.model.Tray;
 import pl.sdacademy.vending.model.VendingMachine;
@@ -48,6 +49,10 @@ public class CustomerOperationController {
         }
     }
 
+    public Optional<Product> buyProductForSymbol(String traySymbol) {
+        return machine.buyProductWithSymbol(traySymbol);
+    }
+
     private void printUpperBoundary(int row, int column) {
         System.out.print("+" + StringUtil.duplicateText("-", trayWidth) + "+");
     }
@@ -65,7 +70,7 @@ public class CustomerOperationController {
         String formattedName = productName.orElse("--");
         System.out.print("|" + StringUtil.adjustText(formattedName, trayWidth) + "|");
 
-}
+    }
 
     private void printPrice(int row, int column) {
         Optional<Tray> tray = machine.getTrayAtPosition(row, column);
@@ -78,4 +83,5 @@ public class CustomerOperationController {
     private void printLowerBoundary(int row, int column) {
         System.out.print("+" + StringUtil.duplicateText("-", trayWidth) + "+");
     }
+
 }
