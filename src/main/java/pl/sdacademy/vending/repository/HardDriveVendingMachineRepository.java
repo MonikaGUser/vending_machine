@@ -40,10 +40,9 @@ public class HardDriveVendingMachineRepository implements VendingMachineReposito
 
         } catch (IOException e) {
             System.out.println("Vending Machine Repo file not found");
-            e.printStackTrace();
 
         } catch (ClassNotFoundException e) {
-            e.printStackTrace();
+            System.out.println("Could not find Vending machine class");
         }
 return Optional.empty();
         // utworz obiekt ObjectInputStream
