@@ -24,6 +24,7 @@ public class DefaultEmployeeService implements EmployeeService {
 
         if (vendingMachine.placeTray(tray)) {
             machineRepository.save(vendingMachine);
+            return Optional.empty();
         } else {
             return Optional.of("Couldn't set up tray, please check provided value");
         }
@@ -31,7 +32,7 @@ public class DefaultEmployeeService implements EmployeeService {
             // dodaj tacke
             // sprawdz czy sie udalo dodac tacke
             // jesli sie udalo zapisujemy automat vendingowy, jak nie to zwroc komunikat bledu
-            return Optional.empty();
+
         }
     }
 
